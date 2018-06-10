@@ -1,22 +1,33 @@
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
+import axios from "axios";
+import * as MaterialStyles from "@material-ui/core/styles";
+import * as ReactRouter from "react-router-dom";
+import * as scenes from "./scenes";
+import "typeface-open-sans";
 
-import logo from './logo.svg';
+const API_URL = "https://api.staging.boogaloo.xroadsed.com";
+axios.defaults.baseURL = API_URL;
+axios.defaults.withCredentials = true;
 
-class App extends React.Component {
+const theme = MaterialStyles.createMuiTheme({
+    typography: {
+        fontFamily: "open-sans",
+        caption: {
+            fontSize: "14px"
+        }
+    }
+});
+
+export default class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+        <ReactRouter.BrowserRouter>
+            <MaterialStyles.MuiThemeProvider theme={theme}>
+                <ReactRouter.Switch>
+                    <ReactRouter.Route path="/" exact component={scenes.index} />
+                </ReactRouter.Switch>
+            </MaterialStyles.MuiThemeProvider>
+        </ReactRouter.BrowserRouter>
     );
   }
 }
-
-export default App;
