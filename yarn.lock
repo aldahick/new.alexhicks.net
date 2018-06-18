@@ -76,6 +76,10 @@
     csstype "^2.0.0"
     indefinite-observable "^1.0.1"
 
+"@types/lodash@^4.14.109":
+  version "4.14.109"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.109.tgz#b1c4442239730bf35cabaf493c772b18c045886d"
+
 "@types/node@*", "@types/node@^10.3.2":
   version "10.3.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.2.tgz#3840ec6c12556fdda6e0e6d036df853101d732a4"
@@ -7183,9 +7187,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typeface-open-sans@^0.0.54:
+typeface-nunito@^0.0.54:
   version "0.0.54"
-  resolved "https://registry.yarnpkg.com/typeface-open-sans/-/typeface-open-sans-0.0.54.tgz#20f5b5ea5c7f95d89dc1f8b2d2b1457680129cee"
+  resolved "https://registry.yarnpkg.com/typeface-nunito/-/typeface-nunito-0.0.54.tgz#5046f24d8d1492ca8fd823896d6e1cdefbe63203"
 
 typescript@^2.9.1:
   version "2.9.1"

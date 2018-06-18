@@ -13,18 +13,15 @@
     "ban-comma-operator": true,
     "callable-types": true,
     "class-name": true,
-    "comment-format": [
-      true,
+    "comment-format": [true,
       "check-space"
     ],
-    "curly": [
-      true,
+    "curly": [true,
       "ignore-same-line"
     ],
     "deprecation": true,
     "eofline": true,
-    "indent": [
-      true,
+    "indent": [true,
       "spaces"
     ],
     "jsdoc-format": true,
@@ -39,8 +36,7 @@
     "no-duplicate-super": true,
     "jsx-no-lambda": false,
     "jsx-boolean-value": false,
-    "no-duplicate-variable": [
-      true,
+    "no-duplicate-variable": [true,
       "check-parameters"
     ],
     "no-empty-interface": true,
@@ -60,24 +56,20 @@
     "no-unused-variable": false,
     "no-var-keyword": true,
     "object-literal-shorthand": true,
-    "one-line": [
-      true,
+    "one-line": [true,
       "check-open-brace",
       "check-whitespace"
     ],
-    "only-arrow-functions": [
-      true,
+    "only-arrow-functions": [true,
       "allow-declarations"
     ],
     "prefer-const": true,
     "prefer-method-signature": true,
-    "quotemark": [
-      true,
+    "quotemark": [true,
       "double",
       "avoid-escape"
     ],
-    "semicolon": [
-      true,
+    "semicolon": [true,
       "always",
       "ignore-bound-class-methods"
     ],
@@ -100,14 +92,12 @@
     ],
     "use-default-type-parameter": true,
     "use-isnan": true,
-    "variable-name": [
-      true,
+    "variable-name": [true,
       "check-format",
       "ban-keywords",
       "allow-pascal-case"
     ],
-    "whitespace": [
-      true,
+    "whitespace": [true,
       "check-branch",
       "check-decl",
       "check-operator",
