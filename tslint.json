@@ -1,6 +1,8 @@
 {
   "extends": [
-    "tslint-react"
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-sonarts"
   ],
   "rules": {
     "array-type": [true,
