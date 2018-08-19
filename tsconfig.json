@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "experimentalDecorators": true,
     "outDir": "build/dist",
     "module": "esnext",
