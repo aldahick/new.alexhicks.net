@@ -5,13 +5,12 @@ import { withStyles, StyleComponentProps, StyleRules } from "@material-ui/core/s
 
 const styles: StyleRules = {
     heading: {
-        "& span": {
-            fontFamily: "Courier, monospace",
-        }
+        textAlign: "center",
+        width: "100%"
     },
     tokenSeparator: {
         padding: "0 4px"
-    },
+    }
 };
 
 interface DirectorySelectProps extends StyleComponentProps {
@@ -79,23 +78,19 @@ export default class DirectorySelect extends React.Component<DirectorySelectProp
     render() {
         return (
             <div>
-                <Material.Grid container justify="center">
-                    <Material.Grid item xs={12} sm={9} md={6}>
-                        <Material.Typography className={this.props.classes.heading}>
-                            {this.state.selected.map((token, index) =>
-                                <span key={token}>
-                                    <span onClick={this.onReset(index)} style={{ cursor: "pointer" }}>
-                                        {token}
-                                    </span>
-                                    <span className={this.props.classes.tokenSeparator}>/</span>
-                                </span>
-                            )}
-                            <span>
-                                {this.state.currentToken}
+                <Material.Typography className={this.props.classes.heading}>
+                    {this.state.selected.map((token, index) =>
+                        <span key={token}>
+                            <span onClick={this.onReset(index)} style={{ cursor: "pointer" }}>
+                                {token}
                             </span>
-                        </Material.Typography>
-                    </Material.Grid>
-                </Material.Grid>
+                            <span className={this.props.classes.tokenSeparator}>/</span>
+                        </span>
+                    )}
+                    <span>
+                        {this.state.currentToken}
+                    </span>
+                </Material.Typography>
                 <Material.Grid container justify="center">
                     <Material.Grid item xs={8} sm={6} md={4}>
                         <Material.Select
