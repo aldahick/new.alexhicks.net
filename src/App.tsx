@@ -20,24 +20,16 @@ const theme = MaterialStyles.createMuiTheme({
     }
 });
 
-interface AppState {
-    isAuthenticated: boolean;
-}
-
-export default class App extends React.Component<object, AppState> {
-    readonly state = {
-        isAuthenticated: false
-    };
-
+export default class App extends React.Component {
     public render() {
         return (
             <ReactRouter.BrowserRouter>
                 <MaterialStyles.MuiThemeProvider theme={theme}>
                     <Navbar />
                     <ReactRouter.Switch>
-                        <ReactRouter.Route path="/" exact component={scenes.index} />
-                        <ReactRouter.Route path="/login" exact component={scenes.login} />
-                        <PrivateRoute path="/media" component={scenes.media} authenticated={this.state.isAuthenticated} />
+                        <ReactRouter.Route path="/" exact component={scenes.IndexScene} />
+                        <ReactRouter.Route path="/login" exact component={scenes.LoginScene} />
+                        <PrivateRoute path="/media" component={scenes.MediaScene} />
                     </ReactRouter.Switch>
                 </MaterialStyles.MuiThemeProvider>
             </ReactRouter.BrowserRouter>

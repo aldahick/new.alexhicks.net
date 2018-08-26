@@ -11,7 +11,7 @@ interface LoginState {
     shouldRedirect: boolean;
 }
 
-export default class LoginScene extends React.Component<ReactRouter.RouteComponentProps<object>, LoginState> {
+export class LoginScene extends React.Component<ReactRouter.RouteComponentProps<object>, LoginState> {
     readonly state = {
         username: "",
         password: "",

@@ -16,7 +16,7 @@ interface MediaState {
 }
 
 @withStyles(styles)
-export default class MediaScene extends React.Component<StyleComponentProps, MediaState> {
+export class MediaScene extends React.Component<StyleComponentProps, MediaState> {
     readonly state: MediaState = {
         mediaItems: [],
         selectedItem: undefined
