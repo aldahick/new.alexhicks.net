@@ -21,14 +21,14 @@ class UserState {
             return;
         }
         axios.defaults.headers.Authorization = "bearer " + value;
-        localStorage.setItem(STORAGE_KEY, value);
+        sessionStorage.setItem(STORAGE_KEY, value);
     }
 
     deleteToken() {
         delete axios.defaults.headers.Authorization;
-        localStorage.removeItem(STORAGE_KEY);
+        sessionStorage.removeItem(STORAGE_KEY);
     }
 }
 
-const token = localStorage.getItem(STORAGE_KEY);
+const token = sessionStorage.getItem(STORAGE_KEY);
 export default new UserState(token);

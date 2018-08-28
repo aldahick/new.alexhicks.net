@@ -20,7 +20,7 @@ export default class MediaItemView extends React.Component<MediaItemViewProps, M
     async componentDidMount() {
         const content = await axios.get(this.url).then(r => r.data);
         this.setState({
-            content: typeof(content) === "string" ? content : this.blobToBase64(content)
+            content: typeof(content) === "string" ? content : await this.blobToBase64(content)
         });
     }
 

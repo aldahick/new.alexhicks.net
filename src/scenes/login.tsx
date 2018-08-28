@@ -31,15 +31,18 @@ export class LoginScene extends React.Component<ReactRouter.RouteComponentProps<
     };
 
     submit = async () => {
-        const res = await axios.get("/user/generateToken", {
-            params: this.state as GenerateToken.Params
-        }).then(res => res.data as GenerateToken.Response);
-        if ("statusCode" in res) {
-            alert("Incorrect username or password!");
-            return this.setState({
-                username: "",
-                password: ""
-            });
+        let res: GenerateToken.Response;
+        try {
+            res = await axios.get("/user/generateToken", {
+                params: this.state as GenerateToken.Params
+            }).then(res => res.data);
+        } catch (err) {
+            if (err.response.status === 401) {
+                alert("Incorrect username or password!");
+                return this.setState({
+                    password: ""
+                });
+            } else throw err;
         }
         UserState.token = res.token;
         this.setState({ shouldRedirect: true });
