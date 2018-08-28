@@ -1,88 +1,47 @@
 import * as React from "react";
 import * as ReactRouter from "react-router-dom";
 import * as Material from "@material-ui/core";
-import axios from "axios";
-import * as GenerateToken from "endpoints/user/generateToken";
+import LoginForm from "components/auth/LoginForm";
 import UserState from "components/auth/UserState";
 
 interface LoginState {
-    username: string;
-    password: string;
     shouldRedirect: boolean;
+    errorMessage: string;
 }
 
 export class LoginScene extends React.Component<ReactRouter.RouteComponentProps<object>, LoginState> {
     readonly state = {
-        username: "",
-        password: "",
-        shouldRedirect: UserState.isAuthenticated
+        shouldRedirect: UserState.isAuthenticated,
+        errorMessage: ""
     };
 
-    onChange = (key: "username" | "password") => (evt: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            [key]: evt.target.value
-        } as any);
-    };
-
-    onKeyUp = (evt: React.KeyboardEvent) => {
-        if (evt.key === "Enter") {
-            this.submit().catch(err => alert("Couldn't log in! " + err.message));
-        }
-    };
-
-    submit = async () => {
-        let res: GenerateToken.Response;
-        try {
-            res = await axios.get("/user/generateToken", {
-                params: this.state as GenerateToken.Params
-            }).then(res => res.data);
-        } catch (err) {
-            if (err.response.status === 401) {
-                alert("Incorrect username or password!");
-                return this.setState({
-                    password: ""
-                });
-            } else throw err;
-        }
-        UserState.token = res.token;
+    onSuccess = () => {
         this.setState({ shouldRedirect: true });
+    };
+
+    onFailure = () => {
+        this.setState({ errorMessage: "Invalid username or password!" });
     };
 
     render() {
         if (this.state.shouldRedirect) {
             return (
-                <ReactRouter.Redirect to={this.props.location.state.from} />
+                <ReactRouter.Redirect to={(this.props.location.state || { from: "/" }).from} />
             );
-        }
-        return (
-            <Material.Grid container direction="column" alignItems="center">
-                <Material.Grid item xs={12} sm={8} md={6} lg={4}>
-                    <Material.TextField
-                        fullWidth
-                        label="Username"
-                        value={this.state.username}
-                        onChange={this.onChange("username")}
-                        onKeyUp={this.onKeyUp}
-                    />
-                </Material.Grid>
-                <Material.Grid item xs={12} sm={8} md={6} lg={4}>
-                    <Material.TextField
-                        fullWidth
-                        type="password"
-                        label="Password"
-                        value={this.state.password}
-                        onChange={this.onChange("password")}
-                        onKeyUp={this.onKeyUp}
-                    />
-                </Material.Grid>
-                <Material.Grid item xs={3}>
-                    <Material.Grid container>
-                        <Material.Button variant="contained" onClick={this.submit}>
-                            Login
-                        </Material.Button>
+        } else {
+            return (
+                <Material.Grid container justify="center">
+                    <Material.Grid item xs={12} sm={9} md={6} lg={4}>
+                        <Material.Typography color="secondary" variant="subheading" style={{textAlign: "center"}}>
+                            {this.state.errorMessage}
+                        </Material.Typography>
+                        <LoginForm
+                            onSuccess={this.onSuccess}
+                            onFailure={this.onFailure}
+                        />
                     </Material.Grid>
                 </Material.Grid>
-            </Material.Grid>
-        );
+            );
+        }
     }
 }
