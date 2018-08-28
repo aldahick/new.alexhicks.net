@@ -8,7 +8,7 @@ import PrivateRoute from "components/auth/PrivateRoute";
 import "components/auth/UserState";
 import "typeface-open-sans";
 
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 (window as any).axios = axios;
 
 const theme = MaterialStyles.createMuiTheme({
