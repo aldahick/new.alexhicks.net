@@ -1,3 +1,3 @@
-# React TS Template
+# new.alexhicks.net
 
-This is a React bootstrapper template for TypeScript, using my ([@aldahick](https://github.com/aldahick)'s) preferred styles and conventions.
+A new version of my website. Has some utilities and cool stuff, mostly on the [back-end](https://github.com/aldahick/api.alexhicks.net).
