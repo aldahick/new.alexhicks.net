@@ -23,7 +23,7 @@ const theme = MaterialStyles.createMuiTheme({
 export default class App extends React.Component {
     public render() {
         return (
-            <ReactRouter.BrowserRouter>
+            <ReactRouter.BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
                 <MaterialStyles.MuiThemeProvider theme={theme}>
                     <Navbar />
                     <ReactRouter.Switch>
