@@ -37,14 +37,14 @@ export class IndexScene extends React.Component<StyleComponentProps> {
                     <Material.Grid container justify="center" spacing={16}>
                         <Material.Grid item>
                             <SocialBadge
-                                imageUrl="/images/logos/github.png"
+                                imageUrl="images/logos/github.png"
                                 url="https://github.com/aldahick"
                                 label="@aldahick"
                             />
                         </Material.Grid>
                         <Material.Grid item>
                             <SocialBadge
-                                imageUrl="/images/logos/linkedin.png"
+                                imageUrl="images/logos/linkedin.png"
                                 url="https://linkedin.com/in/aldahick"
                                 label="@aldahick"
                             />
