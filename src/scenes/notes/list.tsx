@@ -7,7 +7,7 @@ import ItemsTable from "components/ItemsTable";
 
 interface NotesListState {
     notes: db.MediaItem[];
-    createdId: number;
+    createdId: number | undefined;
 }
 
 export class NotesListScene extends React.Component<object, NotesListState> {

@@ -3,7 +3,7 @@ import axios from "axios";
 const STORAGE_KEY = "auth.token";
 
 class UserState {
-    constructor(token: string) {
+    constructor(token?: string) {
         this.token = token;
     }
 
@@ -15,7 +15,7 @@ class UserState {
         return (axios.defaults.headers.Authorization || "").split(" ")[1];
     }
 
-    set token(value: string) {
+    set token(value: string | undefined) {
         if (!value) {
             this.deleteToken();
             return;
@@ -31,4 +31,4 @@ class UserState {
 }
 
 const token = sessionStorage.getItem(STORAGE_KEY);
-export default new UserState(token);
+export default new UserState(token || undefined);

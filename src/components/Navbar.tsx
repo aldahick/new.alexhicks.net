@@ -34,7 +34,7 @@ export default class Navbar extends React.Component<StyleComponentProps, NavbarS
     renderLinks = (links: {[key: string]: string}) =>
         Object.keys(links).map(label => (
             <Material.MenuItem key={label}>
-                <ReactRouter.NavLink to={links[label]} className={this.props.classes.navLink}>
+                <ReactRouter.NavLink to={links[label]} className={this.props.classes!.navLink}>
                     {label}
                 </ReactRouter.NavLink>
             </Material.MenuItem>

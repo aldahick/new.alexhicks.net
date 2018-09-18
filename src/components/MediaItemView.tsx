@@ -29,7 +29,7 @@ export default class MediaItemView extends React.Component<MediaItemViewProps, M
         reader.readAsDataURL(blob);
         return new Promise((resolve, reject) => {
             reader.onloadend = () => {
-                resolve(reader.result.toString());
+                resolve(reader.result!.toString());
             };
             reader.onerror = err => {
                 reject(err);

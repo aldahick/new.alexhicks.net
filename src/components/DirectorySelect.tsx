@@ -20,7 +20,7 @@ interface DirectorySelectProps extends StyleComponentProps {
 
 interface DirectorySelectState {
     selected: string[];
-    currentToken?: string;
+    currentToken: string;
 }
 
 @withStyles(styles)
@@ -78,13 +78,13 @@ export default class DirectorySelect extends React.Component<DirectorySelectProp
     render() {
         return (
             <div>
-                <Material.Typography className={this.props.classes.heading}>
+                <Material.Typography className={this.props.classes!.heading}>
                     {this.state.selected.map((token, index) =>
                         <span key={token}>
                             <span onClick={this.onReset(index)} style={{ cursor: "pointer" }}>
                                 {token}
                             </span>
-                            <span className={this.props.classes.tokenSeparator}>/</span>
+                            <span className={this.props.classes!.tokenSeparator}>/</span>
                         </span>
                     )}
                     <span>

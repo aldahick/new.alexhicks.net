@@ -18,7 +18,7 @@ export class IndexScene extends React.Component<StyleComponentProps> {
     render() {
         return (
             <Material.Grid container justify="center">
-                <Material.Grid item className={this.props.classes.introduction}>
+                <Material.Grid item className={this.props.classes!.introduction}>
                     <Material.Typography variant="display1">
                         My name is Alex Hicks.
                     </Material.Typography>

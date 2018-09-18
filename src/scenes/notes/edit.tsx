@@ -27,7 +27,7 @@ const styles: StyleRules = {
 type NoteEditProps = RouteComponentProps<{ id: string; }> & StyleComponentProps;
 
 interface NoteEditState {
-    note: db.MediaItem;
+    note: db.MediaItem | undefined;
     name: string;
     body: string;
 }
@@ -74,7 +74,7 @@ export class NoteEditScene extends React.Component<NoteEditProps, NoteEditState>
     };
 
     async submit() {
-        await axios.patch("/media/" + this.state.note.id, {
+        await axios.patch("/media/" + this.state.note!.id, {
             key: "notes/" + this.state.name,
             content: this.state.body
         });
@@ -94,7 +94,7 @@ export class NoteEditScene extends React.Component<NoteEditProps, NoteEditState>
         return (
             <Material.Grid container justify="center">
                 <Material.Grid item xs={12} md={8}>
-                    <div className={this.props.classes.title}>
+                    <div className={this.props.classes!.title}>
                         <Material.Typography variant="display1">
                             Edit Note
                         </Material.Typography>
@@ -121,7 +121,7 @@ export class NoteEditScene extends React.Component<NoteEditProps, NoteEditState>
                                 editorProps={{ $blockScrolling: Infinity }}
                             />
                         </Material.Grid>
-                        <Material.Grid item xs={6} className={this.props.classes.renderPreview}>
+                        <Material.Grid item xs={6} className={this.props.classes!.renderPreview}>
                             {this.renderMath()}
                         </Material.Grid>
                     </Material.Grid>

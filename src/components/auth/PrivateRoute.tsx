@@ -3,7 +3,7 @@ import * as ReactRouter from "react-router-dom";
 import UserState from "components/auth/UserState";
 
 export default ({ component, ...rest }: ReactRouter.RouteProps) => {
-    const Component = component;
+    const Component = component!;
     return (
         <ReactRouter.Route
             {...rest}

@@ -16,7 +16,7 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [

@@ -1,19 +1,51 @@
 import * as React from "react";
 import * as Material from "@material-ui/core";
-import Chessboard, { Piece as ChessPiece } from "react-chess";
+import axios from "axios";
+import * as io from "socket.io-client";
+import Chessboard from "../../components/Chessboard";
 
-export class ChessGameScene extends React.Component {
-    onPieceMove = (piece: ChessPiece, from: string, to: string) => {
-        console.log(piece, from, to);
+interface ChessGameState {
+    fen?: string;
+}
+
+export class ChessGameScene extends React.Component<object, ChessGameState> {
+    readonly state: ChessGameState = {
+        fen: undefined
+    };
+    socket: SocketIOClient.Socket;
+
+    async componentDidMount() {
+        this.socket = io(axios.defaults.baseURL + "/chess");
+        await new Promise(resolve => this.socket.once("connect", resolve));
+        this.socket.on("board", this.onReceiveBoard);
+        this.socket.on("board:reset", this.onResetBoard);
+        this.socket.emit("join", {
+            name: "Alex"
+        });
+    }
+
+    onReceiveBoard = (fen: string) => {
+        console.log(fen);
+        this.setState({ fen });
+    };
+
+    onResetBoard = () => {
+        console.log("resetting board");
+    };
+
+    onPieceMove = (from: string, to: string) => {
+        console.log(from, to);
+        this.socket.emit("move", { from, to });
     };
 
     render() {
         return (
             <Material.Grid container justify="center">
                 <Material.Grid item xs={12} sm={8} md={6} lg={4}>
-                    <Chessboard
-                        onMovePiece={this.onPieceMove}
-                    />
+                    {this.state.fen !== undefined ? <Chessboard
+                        onMove={this.onPieceMove}
+                        fen={this.state.fen}
+                    /> : "Loading..."}
                 </Material.Grid>
             </Material.Grid>
         );

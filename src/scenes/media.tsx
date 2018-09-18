@@ -31,7 +31,7 @@ export class MediaScene extends React.Component<StyleComponentProps, MediaState>
     }
 
     onItemDelete = async () => {
-        await axios.delete("/media/" + this.state.selectedItem.id);
+        await axios.delete("/media/" + this.state.selectedItem!.id);
         this.setState({
             selectedItem: undefined
         });

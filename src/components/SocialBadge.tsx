@@ -19,7 +19,7 @@ interface SocialBadgeProps extends StyleComponentProps {
 export default class SocialBadge extends React.Component<SocialBadgeProps> {
     render() {
         return (
-            <a href={this.props.url} className={this.props.classes.badgeContainer}>
+            <a href={this.props.url} className={this.props.classes!.badgeContainer}>
                 <Material.Grid container alignItems="center" direction="column">
                     <Material.Grid item>
                         <img src={this.props.imageUrl} height={32} {...(this.props.imageProps || {})} />

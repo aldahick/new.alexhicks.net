@@ -5999,14 +5999,6 @@ react-ace@^6.1.4:
     lodash.isequal "^4.1.1"
     prop-types "^15.5.8"
 
-react-chess@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-chess/-/react-chess-1.1.0.tgz#ea2bcbeddc312b8f7b6eb690d4c5454714aca2c6"
-  dependencies:
-    prop-types "^15.6.0"
-    react-draggable "^3.0.3"
-    react-resize-aware "^2.7.0"
-
 react-dev-utils@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-5.0.1.tgz#1f396e161fe44b595db1b186a40067289bf06613"
@@ -6039,7 +6031,7 @@ react-dom@^16.4.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-draggable@^3.0.3:
+react-draggable@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-3.0.5.tgz#c031e0ed4313531f9409d6cd84c8ebcec0ddfe2d"
   dependencies:
@@ -6084,10 +6076,6 @@ react-popper@^0.10.0:
   dependencies:
     popper.js "^1.14.1"
     prop-types "^15.6.1"
-
-react-resize-aware@^2.7.0:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/react-resize-aware/-/react-resize-aware-2.7.1.tgz#e54bc5fc4d67e3f9cc0342626e836bfc207e322e"
 
 react-router-dom@^4.3.1:
   version "4.3.1"
