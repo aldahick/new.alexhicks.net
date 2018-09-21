@@ -25,16 +25,15 @@ export class ChessGameScene extends React.Component<object, ChessGameState> {
     }
 
     onReceiveBoard = (fen: string) => {
-        console.log(fen);
         this.setState({ fen });
     };
 
     onResetBoard = () => {
         console.log("resetting board");
+        this.setState({ fen: this.state.fen + " " });
     };
 
     onPieceMove = (from: string, to: string) => {
-        console.log(from, to);
         this.socket.emit("move", { from, to });
     };
 

@@ -21,6 +21,5 @@ export function parseFEN(fen: string): PieceData[] {
             }
         }
     });
-    console.log(pieces);
     return pieces;
 }

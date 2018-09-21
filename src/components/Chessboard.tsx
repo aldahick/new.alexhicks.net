@@ -31,8 +31,13 @@ interface ChessboardState {
 export default class Chessboard extends React.Component<ChessboardProps, ChessboardState> {
     constructor(props: ChessboardProps) {
         super(props);
-        this.state = {
-            pieces: chess.parseFEN(this.props.fen)
+        this.state = { pieces: [] };
+        console.log("constructing board");
+    }
+
+    static getDerivedStateFromProps(props: ChessboardProps): ChessboardState {
+        return {
+            pieces: chess.parseFEN(props.fen)
         };
     }
 
@@ -40,9 +45,8 @@ export default class Chessboard extends React.Component<ChessboardProps, Chessbo
         const oldSan = chess.Piece.getSAN(piece);
         piece.x = x;
         piece.y = y;
-        this.setState({
-            pieces: this.state.pieces
-        }, () => this.props.onMove(oldSan, chess.Piece.getSAN(piece)));
+        this.setState({ pieces: this.state.pieces });
+        this.props.onMove(oldSan, chess.Piece.getSAN(piece));
     };
 
     renderPiece = (x: number, y: number) => {

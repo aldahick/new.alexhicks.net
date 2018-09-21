@@ -10,10 +10,10 @@ interface PieceProps {
 }
 
 export class Piece extends React.Component<PieceProps> {
-    onMove = (_: Event, data: DraggableData) => {
+    onDragStop = (_: Event, data: DraggableData) => {
         this.props.onMove(
-            Math.ceil(this.props.piece.x + (data.x / 64)),
-            Math.floor(this.props.piece.y - (data.y / 64))
+            Math.floor(this.props.piece.x + (data.lastX / 64)),
+            Math.floor(this.props.piece.y - (data.lastY / 64))
         );
     };
 
@@ -24,7 +24,7 @@ export class Piece extends React.Component<PieceProps> {
 
     render() {
         return (
-            <Draggable onStop={this.onMove}>
+            <Draggable grid={[64, 64]} onStop={this.onDragStop}>
                 <div>
                     <img src={this.imageUrl} width="64px" draggable={false} />
                 </div>
