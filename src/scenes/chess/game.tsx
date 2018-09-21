@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactRouter from "react-router-dom";
 import * as Material from "@material-ui/core";
 import axios from "axios";
 import * as io from "socket.io-client";
@@ -6,12 +7,14 @@ import * as randomstring from "randomstring";
 import * as chess from "../../components/chess";
 import Chessboard from "../../components/Chessboard";
 
+type ChessGameProps = ReactRouter.RouteComponentProps<{ id?: string }>;
+
 interface ChessGameState {
     fen?: string;
     currentTurn: chess.PieceColor;
 }
 
-export class ChessGameScene extends React.Component<object, ChessGameState> {
+export class ChessGameScene extends React.Component<ChessGameProps, ChessGameState> {
     readonly state: ChessGameState = {
         fen: undefined,
         currentTurn: chess.PieceColor.White
@@ -25,6 +28,7 @@ export class ChessGameScene extends React.Component<object, ChessGameState> {
         this.socket.on("board:reset", this.onResetBoard);
         this.socket.emit("join", {
             id: this.id,
+            gameId: this.props.match.params.id,
             name: "Alex" // TODO prompt for name
         });
     }

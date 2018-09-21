@@ -4,6 +4,7 @@ export * from "./scenes/logout";
 export * from "./scenes/media";
 
 export * from "./scenes/chess/game";
+export * from "./scenes/chess/lobby";
 
 export * from "./scenes/notes/edit";
 export * from "./scenes/notes/list";
