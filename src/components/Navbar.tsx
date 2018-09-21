@@ -18,7 +18,8 @@ const NOAUTH_LINKS: {[key: string]: string} = {
 
 const AUTH_LINKS: {[key: string]: string} = {
     "Manage Media": "/media",
-    "List Notes": "/notes"
+    "List Notes": "/notes",
+    "Chess Lobby": "/chess"
 };
 
 interface NavbarState {

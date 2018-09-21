@@ -29,9 +29,10 @@ export default class App extends React.Component {
                     <ReactRouter.Switch>
                         <ReactRouter.Route path="/" exact component={scenes.IndexScene} />
                         <ReactRouter.Route path="/login" exact component={scenes.LoginScene} />
-                        <ReactRouter.Route path="/chess/lobby" exact component={scenes.ChessLobbyScene} />
-                        <ReactRouter.Route path="/chess/game" exact component={scenes.ChessGameScene} />
-                        <ReactRouter.Route path="/chess/game/:id" exact component={scenes.ChessGameScene} />
+                        <PrivateRoute path="/chess" exact component={scenes.ChessLobbyScene} />
+                        <PrivateRoute path="/chess/lobby" exact component={scenes.ChessLobbyScene} />
+                        <PrivateRoute path="/chess/game" exact component={scenes.ChessGameScene} />
+                        <PrivateRoute path="/chess/game/:id" exact component={scenes.ChessGameScene} />
                         <PrivateRoute path="/logout" exact component={scenes.LogoutScene} />
                         <PrivateRoute path="/media" exact component={scenes.MediaScene} />
                         <PrivateRoute path="/notes" exact component={scenes.NotesListScene} />

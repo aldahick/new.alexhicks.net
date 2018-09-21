@@ -3,9 +3,9 @@ import * as ReactRouter from "react-router-dom";
 import * as Material from "@material-ui/core";
 import axios from "axios";
 import * as io from "socket.io-client";
-import * as randomstring from "randomstring";
-import * as chess from "../../components/chess";
-import Chessboard from "../../components/Chessboard";
+import * as chess from "components/chess";
+import Chessboard from "components/Chessboard";
+import UserState from "components/auth/UserState";
 
 type ChessGameProps = ReactRouter.RouteComponentProps<{ id?: string }>;
 
@@ -27,18 +27,9 @@ export class ChessGameScene extends React.Component<ChessGameProps, ChessGameSta
         this.socket.on("board", this.onReceiveBoard);
         this.socket.on("board:reset", this.onResetBoard);
         this.socket.emit("join", {
-            id: this.id,
             gameId: this.props.match.params.id,
-            name: "Alex" // TODO prompt for name
+            token: UserState.token
         });
-    }
-
-    get id() {
-        let id = sessionStorage.getItem("chess.id");
-        if (id) return id;
-        id = randomstring.generate(10);
-        sessionStorage.setItem("chess.id", id);
-        return id;
     }
 
     onReceiveBoard = (evt: {
