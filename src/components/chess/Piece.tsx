@@ -5,6 +5,7 @@ import { PieceData } from "./PieceData";
 import { getNameForPieceType } from "./PieceType";
 
 interface PieceProps {
+    forceNormalPosition: boolean;
     piece: PieceData;
     onMove(x: number, y: number): void;
 }
@@ -19,12 +20,14 @@ export class Piece extends React.Component<PieceProps> {
 
     get imageUrl() {
         const { piece } = this.props;
-        return (process.env.REACT_APP_BASE_URL || "") + `/images/chess/pieces/${getNameForPieceType(piece.type).toLowerCase()}/${PieceColor[piece.color].toLowerCase()}.svg`;
+        const pieceName = getNameForPieceType(piece.type).toLowerCase();
+        const color = PieceColor[piece.color].toLowerCase();
+        return (process.env.REACT_APP_BASE_URL || "") + `/images/chess/pieces/${pieceName}/${color}.svg`;
     }
 
     render() {
         return (
-            <Draggable grid={[64, 64]} onStop={this.onDragStop}>
+            <Draggable grid={[64, 64]} onStop={this.onDragStop} position={this.props.forceNormalPosition ? {x: 0, y: 0} : undefined}>
                 <div>
                     <img src={this.imageUrl} width="64px" draggable={false} />
                 </div>

@@ -2,15 +2,19 @@ import * as React from "react";
 import * as Material from "@material-ui/core";
 import axios from "axios";
 import * as io from "socket.io-client";
+import * as randomstring from "randomstring";
+import * as chess from "../../components/chess";
 import Chessboard from "../../components/Chessboard";
 
 interface ChessGameState {
     fen?: string;
+    currentTurn: chess.PieceColor;
 }
 
 export class ChessGameScene extends React.Component<object, ChessGameState> {
     readonly state: ChessGameState = {
-        fen: undefined
+        fen: undefined,
+        currentTurn: chess.PieceColor.White
     };
     socket: SocketIOClient.Socket;
 
@@ -20,17 +24,31 @@ export class ChessGameScene extends React.Component<object, ChessGameState> {
         this.socket.on("board", this.onReceiveBoard);
         this.socket.on("board:reset", this.onResetBoard);
         this.socket.emit("join", {
-            name: "Alex"
+            id: this.id,
+            name: "Alex" // TODO prompt for name
         });
     }
 
-    onReceiveBoard = (fen: string) => {
-        this.setState({ fen });
+    get id() {
+        let id = sessionStorage.getItem("chess.id");
+        if (id) return id;
+        id = randomstring.generate(10);
+        sessionStorage.setItem("chess.id", id);
+        return id;
+    }
+
+    onReceiveBoard = (evt: {
+        fen: string;
+        currentTurn: "b" | "w";
+    }) => {
+        this.setState({
+            fen: evt.fen,
+            currentTurn: chess.getColorFromAPI(evt.currentTurn)
+        });
     };
 
     onResetBoard = () => {
-        console.log("resetting board");
-        this.setState({ fen: this.state.fen + " " });
+        this.setState({ fen: this.state.fen + "." });
     };
 
     onPieceMove = (from: string, to: string) => {
@@ -41,10 +59,15 @@ export class ChessGameScene extends React.Component<object, ChessGameState> {
         return (
             <Material.Grid container justify="center">
                 <Material.Grid item xs={12} sm={8} md={6} lg={4}>
-                    {this.state.fen !== undefined ? <Chessboard
-                        onMove={this.onPieceMove}
-                        fen={this.state.fen}
-                    /> : "Loading..."}
+                    <div>
+                        Current turn: {chess.PieceColor[this.state.currentTurn]}
+                    </div>
+                    <div>
+                        {this.state.fen !== undefined ? <Chessboard
+                            onMove={this.onPieceMove}
+                            fen={this.state.fen}
+                        /> : "Loading..."}
+                    </div>
                 </Material.Grid>
             </Material.Grid>
         );

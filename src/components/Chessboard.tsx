@@ -32,12 +32,12 @@ export default class Chessboard extends React.Component<ChessboardProps, Chessbo
     constructor(props: ChessboardProps) {
         super(props);
         this.state = { pieces: [] };
-        console.log("constructing board");
     }
 
     static getDerivedStateFromProps(props: ChessboardProps): ChessboardState {
+        const pieces = chess.parseFEN(props.fen);
         return {
-            pieces: chess.parseFEN(props.fen)
+            pieces
         };
     }
 
@@ -52,7 +52,7 @@ export default class Chessboard extends React.Component<ChessboardProps, Chessbo
     renderPiece = (x: number, y: number) => {
         const piece = this.state.pieces.find(p => p.x === x && p.y === y);
         if (!piece) return "";
-        return <chess.Piece piece={piece} onMove={this.onMove(piece)} />;
+        return <chess.Piece piece={piece} onMove={this.onMove(piece)} forceNormalPosition={this.props.fen.endsWith(".")} />;
     };
 
     render() {
