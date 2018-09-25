@@ -7,6 +7,9 @@ interface ItemsTableProps {
 
 export default class ItemsTable extends React.Component<ItemsTableProps> {
     render() {
+        if (this.props.items.length === 0) {
+            return "";
+        }
         return (
             <Material.Table>
                 <Material.TableHead>
