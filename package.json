@@ -5,7 +5,8 @@
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "pull:schema": "bash ./scripts/pull-schema.sh"
   },
   "dependencies": {
     "@material-ui/core": "^1.2.0",
@@ -32,6 +33,7 @@
     "tslint": "^5.11.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-sonarts": "^1.7.0",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "wait-port": "^0.2.2"
   }
 }
