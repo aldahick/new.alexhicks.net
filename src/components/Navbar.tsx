@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactRouter from "react-router-dom";
 import * as Material from "@material-ui/core";
 import { withStyles, StyleComponentProps, StyleRules } from "@material-ui/core/styles";
-import axios from "axios";
+import * as api from "endpoints";
 import UserState from "components/auth/UserState";
 
 const styles: StyleRules = {
@@ -43,8 +43,8 @@ export default class Navbar extends React.Component<StyleComponentProps, NavbarS
 
     async componentDidMount() {
         this.setState({
-            isRegistrationAllowed: await axios.get("/user/canRegister")
-                .then(r => r.data.canRegister)
+            isRegistrationAllowed: await api.user.canRegister()
+                .then(r => r.canRegister)
         });
     }
 

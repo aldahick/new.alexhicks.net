@@ -1,14 +1,15 @@
 import * as React from "react";
 import * as ReactRouter from "react-router-dom";
 import * as Material from "@material-ui/core";
-import axios from "axios";
+import * as api from "endpoints";
 import * as db from "models";
+import { ArgumentTypes } from "lib";
 import ItemsTable from "components/ItemsTable";
 
 type MediaItemListProps = {
     filter(item: db.MediaItem): boolean;
     link(item: db.MediaItem): string;
-    create?(): Partial<db.MediaItem>;
+    create?(): ArgumentTypes<(typeof api)["media"]["create"]>[0]
 };
 
 type MediaItemListState = {
@@ -24,9 +25,9 @@ export default class MediaItemList extends React.Component<MediaItemListProps, M
 
     async componentDidMount() {
         this.setState({
-            items: await axios.get("/media", {
-                params: { dir: "notes" }
-            }).then(r => (r.data.mediaItems as db.MediaItem[])
+            items: await api.media.getMany({
+                dir: "notes"
+            }).then(r => r.mediaItems
                 .filter(this.props.filter)
                 .map(i => ({ ...i, created: new Date(i.created) }))
             )
@@ -34,8 +35,8 @@ export default class MediaItemList extends React.Component<MediaItemListProps, M
     }
 
     onCreate = async () => {
-        const item = await axios.post("/media", this.props.create())
-            .then(r => r.data.mediaItem as db.MediaItem);
+        const item = await api.media.create(this.props.create())
+            .then(r => r.mediaItem);
         this.setState({
             created: item,
             items: this.state.items.concat([item])

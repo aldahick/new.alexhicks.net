@@ -35,6 +35,7 @@
     ],
     "number-literal-format": true,
     "no-construct": true,
+    "no-duplicate-string": false,
     "no-duplicate-super": true,
     "jsx-no-lambda": false,
     "jsx-boolean-value": false,

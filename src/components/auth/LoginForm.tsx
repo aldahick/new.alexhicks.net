@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as Material from "@material-ui/core";
-import axios from "axios";
+import * as api from "endpoints";
 import UserState from "components/auth/UserState";
-import * as GenerateToken from "endpoints/user/generateToken";
 
 interface LoginFormProps {
     onSuccess(): void;
@@ -33,21 +32,19 @@ export default class LoginForm extends React.Component<LoginFormProps, LoginForm
     };
 
     submit = async () => {
-        let res: GenerateToken.Response;
         try {
-            res = await axios.get("/user/generateToken", {
-                params: this.state as GenerateToken.Params
-            }).then(res => res.data);
+            const res = await api.user.generateToken(this.state);
+            UserState.token = res.token;
+            this.props.onSuccess();
         } catch (err) {
-            if (err.response.status === 401) {
-                this.props.onFailure();
-                return this.setState({
-                    password: ""
-                });
-            } else throw err;
+            if (err.response.status !== 401) {
+                throw err;
+            }
+            this.props.onFailure();
+            this.setState({
+                password: ""
+            });
         }
-        UserState.token = res.token;
-        this.props.onSuccess();
     };
 
     render() {

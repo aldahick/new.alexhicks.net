@@ -2,9 +2,9 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as Material from "@material-ui/core";
 import { withStyles, StyleComponentProps, StyleRules } from "@material-ui/core/styles";
-import axios from "axios";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import * as api from "endpoints";
 import * as db from "models";
 
 import "brace";
@@ -41,12 +41,14 @@ export class NoteEditScene extends React.Component<NoteEditProps, NoteEditState>
     };
 
     async componentDidMount() {
-        const note = await axios.get("/media/" + this.props.match.params.id)
-            .then(r => r.data.mediaItem as db.MediaItem);
+        const note = await api.media.getOne({
+            id: Number(this.props.match.params.id)
+        }).then(r => r.mediaItem);
         this.setState({
             note,
             name: note.key.split("/").slice(1).join("/"),
-            body: note.content.data.map(c => String.fromCharCode(c)).join("")
+            body: (note.content as any as { data: number[] }).data
+                .map(c => String.fromCharCode(c)).join("")
         });
     }
 
@@ -55,7 +57,7 @@ export class NoteEditScene extends React.Component<NoteEditProps, NoteEditState>
     onNameChange = (evt: React.ChangeEvent<HTMLInputElement>) =>
         this.setState({ name: evt.target.value });
 
-    checkSavePressed = (evt: React.KeyboardEvent) => {
+    checkSavePressed = async (evt: React.KeyboardEvent) => {
         if (evt.ctrlKey && evt.key === "s") {
             evt.preventDefault();
             this.submit().catch(err => {
@@ -74,7 +76,8 @@ export class NoteEditScene extends React.Component<NoteEditProps, NoteEditState>
     };
 
     async submit() {
-        await axios.patch("/media/" + this.state.note.id, {
+        await api.media.update({
+            id: this.state.note.id,
             key: "notes/" + this.state.name,
             content: this.state.body
         });

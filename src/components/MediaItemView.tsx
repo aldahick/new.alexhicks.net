@@ -1,9 +1,9 @@
 import * as React from "react";
-import axios from "axios";
-import { MediaItem } from "models";
+import * as api from "endpoints";
+import * as db from "models";
 
 interface MediaItemViewProps {
-    item: MediaItem;
+    item: db.MediaItem;
 }
 
 interface MediaItemViewState {
@@ -18,7 +18,9 @@ export default class MediaItemView extends React.Component<MediaItemViewProps, M
     get url() { return `/media/${this.props.item.id}/content`; }
 
     async componentDidMount() {
-        const content = await axios.get(this.url).then(r => r.data);
+        const content = await api.media.getContent({
+            id: this.props.item.id
+        });
         this.setState({
             content: typeof(content) === "string" ? content : await this.blobToBase64(content)
         });

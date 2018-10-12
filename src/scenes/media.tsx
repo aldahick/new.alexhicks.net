@@ -2,9 +2,8 @@ import * as React from "react";
 import * as Material from "@material-ui/core";
 import { withStyles, StyleComponentProps, StyleRules } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
-import axios from "axios";
+import * as api from "endpoints";
 import * as db from "models";
-import * as MediaGetMany from "endpoints/media/getMany";
 import DirectorySelect from "components/DirectorySelect";
 import MediaItemView from "components/MediaItemView";
 
@@ -24,14 +23,13 @@ export class MediaScene extends React.Component<StyleComponentProps, MediaState>
 
     async componentDidMount() {
         this.setState({
-            mediaItems: await axios.get("/media", {
-                params: {} as MediaGetMany.Params
-            }).then(res => (res.data as MediaGetMany.Response).mediaItems)
+            mediaItems: await api.media.getMany({})
+                .then(r => r.mediaItems)
         });
     }
 
     onItemDelete = async () => {
-        await axios.delete("/media/" + this.state.selectedItem.id);
+        await api.media.delete({ id: this.state.selectedItem.id });
         this.setState({
             selectedItem: undefined
         });
