@@ -15,7 +15,7 @@ export const APIEndpoint = <Params, Return>(method: HttpMethod, url: string) => 
     if (method === "get") {
         res = axios.get(url + "?" + new URLSearchParams(data as any).toString());
     } else {
-        res = axios.post(url, data);
+        res = axios.request({ url, data, method });
     }
     return res.then(r => r.data);
 };
