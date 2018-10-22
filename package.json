@@ -23,6 +23,7 @@
     "typeface-open-sans": "^0.0.54"
   },
   "devDependencies": {
+    "@aldahick/tslint-rules": "^0.0.2",
     "@types/axios": "^0.14.0",
     "@types/lodash": "^4.14.109",
     "@types/node": "^10.3.2",
@@ -32,7 +33,6 @@
     "@types/react-router-dom": "^4.2.7",
     "tslint": "^5.11.0",
     "tslint-eslint-rules": "^5.4.0",
-    "tslint-sonarts": "^1.7.0",
     "typescript": "^3.0.1",
     "wait-port": "^0.2.2"
   }

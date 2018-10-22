@@ -21,7 +21,7 @@ const AUTH_LINKS: {[key: string]: string} = {
     "Notes": "/notes",
 };
 
-type NavbarProps = ReactRouter.RouteComponentProps<{}> &
+type NavbarProps = ReactRouter.RouteComponentProps &
     StyleComponentProps &
     ReactRouter.BrowserRouterProps;
 
