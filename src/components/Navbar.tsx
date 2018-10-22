@@ -18,28 +18,22 @@ const NOAUTH_LINKS: {[key: string]: string} = {
 
 const AUTH_LINKS: {[key: string]: string} = {
     "Manage Media": "/media",
-    "List Notes": "/notes"
+    "Notes": "/notes",
 };
+
+type NavbarProps = ReactRouter.RouteComponentProps &
+    StyleComponentProps &
+    ReactRouter.BrowserRouterProps;
 
 interface NavbarState {
     isRegistrationAllowed: boolean;
 }
 
 @withStyles(styles)
-export default class Navbar extends React.Component<StyleComponentProps, NavbarState> {
+class Navbar extends React.Component<NavbarProps, NavbarState> {
     readonly state: NavbarState = {
         isRegistrationAllowed: false
     };
-
-    renderLinks = (links: {[key: string]: string}) =>
-        Object.keys(links).map(label => (
-            <Material.MenuItem key={label}>
-                <ReactRouter.NavLink to={links[label]} className={this.props.classes.navLink}>
-                    {label}
-                </ReactRouter.NavLink>
-            </Material.MenuItem>
-        )
-    );
 
     async componentDidMount() {
         this.setState({
@@ -47,6 +41,19 @@ export default class Navbar extends React.Component<StyleComponentProps, NavbarS
                 .then(r => r.canRegister)
         });
     }
+
+    onNavigate = (redirectTo: string) => () =>
+        this.props.history.push(redirectTo);
+
+    renderLinks = (links: {[key: string]: string}) =>
+        Object.keys(links).map(label => (
+            <Material.MenuItem key={label} onClick={this.onNavigate(links[label])}>
+                <ReactRouter.Link to={links[label]} className={this.props.classes.navLink}>
+                    {label}
+                </ReactRouter.Link>
+            </Material.MenuItem>
+        )
+    );
 
     getLoginLinks() {
         if (UserState.isAuthenticated) {
@@ -74,3 +81,5 @@ export default class Navbar extends React.Component<StyleComponentProps, NavbarS
         );
     }
 }
+
+export default ReactRouter.withRouter(Navbar);

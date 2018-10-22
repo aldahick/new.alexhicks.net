@@ -47,7 +47,7 @@ export class NoteEditScene extends React.Component<NoteEditProps, NoteEditState>
         this.setState({
             note,
             name: note.key.split("/").slice(1).join("/"),
-            body: (note.content as any as { data: number[] }).data
+            body: ((note.content as any).data as number[])
                 .map(c => String.fromCharCode(c)).join("")
         });
     }

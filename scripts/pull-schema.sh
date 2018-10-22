@@ -2,7 +2,7 @@
 
 THIS_DIR=$(dirname $(realpath $0));
 
-root_url="http://localhost:3000";
+root_url="http://localhost:3001";
 if [ $# -gt 1 ]; then
     root_url=$1;
 fi;
