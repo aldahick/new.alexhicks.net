@@ -4,7 +4,7 @@ import { APIEndpoint } from "lib";
 export type CreateParams = {
     key: string;
     mimeType: string;
-    content: string;
+    content?: string;
 };
 export type CreateResponse = {
     mediaItem: db.MediaItem;

@@ -9,5 +9,6 @@ export const NotesListScene: React.StatelessComponent = () => (
             key: "notes/" + new Date().toLocaleString(),
             mimeType: "text/x-note"
         })}
+        prefixCount={1}
     />
 );

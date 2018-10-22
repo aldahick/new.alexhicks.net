@@ -20,22 +20,23 @@ const theme = MaterialStyles.createMuiTheme({
     }
 });
 
-export default class App extends React.Component {
-    public render() {
-        return (
-            <ReactRouter.BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
-                <MaterialStyles.MuiThemeProvider theme={theme}>
-                    <Navbar />
-                    <ReactRouter.Switch>
-                        <ReactRouter.Route path="/" exact component={scenes.IndexScene} />
-                        <ReactRouter.Route path="/login" exact component={scenes.LoginScene} />
-                        <PrivateRoute path="/logout" exact component={scenes.LogoutScene} />
-                        <PrivateRoute path="/media" exact component={scenes.MediaScene} />
-                        <PrivateRoute path="/notes" exact component={scenes.NotesListScene} />
-                        <PrivateRoute path="/note/:id" exact component={scenes.NoteEditScene} />
-                    </ReactRouter.Switch>
-                </MaterialStyles.MuiThemeProvider>
-            </ReactRouter.BrowserRouter>
-        );
-    }
-}
+const App: React.StatelessComponent = () => (
+    <ReactRouter.BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
+        <MaterialStyles.MuiThemeProvider theme={theme}>
+            <Navbar />
+            <ReactRouter.Switch>
+                <ReactRouter.Route path="/" exact component={scenes.IndexScene} />
+
+                <ReactRouter.Route path="/login" exact component={scenes.LoginScene} />
+                <PrivateRoute path="/logout" exact component={scenes.LogoutScene} />
+
+                <PrivateRoute path="/media" exact component={scenes.MediaScene} />
+
+                <PrivateRoute path="/notes" exact component={scenes.NotesListScene} />
+                <PrivateRoute path="/note/:id" exact component={scenes.NoteEditScene} />
+            </ReactRouter.Switch>
+        </MaterialStyles.MuiThemeProvider>
+    </ReactRouter.BrowserRouter>
+);
+
+export default App;
